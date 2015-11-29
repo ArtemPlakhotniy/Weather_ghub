@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
         GetData gd = new GetData();
         gd.execute();
 
-
         df1 = new Df1();
 
         d1txt1 = (TextView) findViewById(R.id.d1txt1);
