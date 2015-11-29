@@ -9,41 +9,53 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Температура:"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Loading..."
-        android:id="@+id/txtTemp" />
+        android:id="@+id/txtTemp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Дата:"
-        android:id="@+id/textView2" />
+        android:id="@+id/textView2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Loading..."
-        android:id="@+id/txtDate" />
+        android:id="@+id/txtDate"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Погодные условия:"
-        android:id="@+id/textView3" />
+        android:id="@+id/textView3"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Loading..."
-        android:id="@+id/txtWeather" />
+        android:id="@+id/txtWeather"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="0dp" />
 
 </LinearLayout>

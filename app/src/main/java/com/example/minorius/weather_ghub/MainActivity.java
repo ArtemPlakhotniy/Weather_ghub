@@ -2,10 +2,12 @@ package com.example.minorius.weather_ghub;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Entity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Image;
+import android.net.ConnectivityManager;
 import android.net.http.HttpResponseCache;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.minorius.weather_ghub.WeatherDb.WeatherDbase;
 import com.example.minorius.weather_ghub.adapter.UpData;
 import com.example.minorius.weather_ghub.adapter.WorkingAdapter;
 import com.example.minorius.weather_ghub.descriptoin_fragments.Df1;
@@ -39,6 +42,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class MainActivity extends AppCompatActivity {
 
     private WorkingAdapter adapter;
@@ -55,12 +61,39 @@ public class MainActivity extends AppCompatActivity {
     public TextView d1txt2;
     public TextView d1txt3;
 
+    Realm realm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(isNetworkConnected() == false){
+
+            Realm realm =  Realm.getInstance(getApplicationContext());
+            realm.beginTransaction();
+
+            //WeatherDbase weatherDbase = realm.createObject(WeatherDbase.class);
+            RealmResults<WeatherDbase> results = realm.where(WeatherDbase.class).findAll();
+            realm.commitTransaction();
+
+            int count = results.size();
+
+            if(count < 5){
+                Toast.makeText(getApplicationContext(), "You need ON internet", Toast.LENGTH_LONG).show();
+            }
+            else if (count >= 5){
+                Toast.makeText(getApplicationContext(), "No connecting, data from Db", Toast.LENGTH_LONG).show();
+                for(int i = 5; i > 0; i--){
+                    UpData a = new UpData(""+results.get(count-i).getDataInDb(),""+results.get(count-i).getTempInDb(), results.get(count-i).getDirectionInDb());
+                    fetch.add(a);
+                }
+            }
+        }
+
         GetData gd = new GetData();
         gd.execute();
+
 
         df1 = new Df1();
 
@@ -149,8 +182,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-   class GetData extends AsyncTask<Void, Void, String> {
+        return cm.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    class GetData extends AsyncTask<Void, Void, String> {
 
        HttpURLConnection urlConnection = null;
        BufferedReader reader = null;
@@ -158,13 +201,13 @@ public class MainActivity extends AppCompatActivity {
 
        @Override
        protected String doInBackground(Void... params) {
-
            JSONObject dataJsonObj = null;
            String url_for_img = "http://openweathermap.org/img/w/";
 
            try {
 
                URL url = new URL("http://api.openweathermap.org/data/2.5/forecast?id=710791&appid=2de143494c0b295cca9337e1e96b00e0");
+
                urlConnection = (HttpURLConnection) url.openConnection();
                urlConnection.setRequestMethod("GET");
                urlConnection.connect();
@@ -178,13 +221,11 @@ public class MainActivity extends AppCompatActivity {
                while ((line = reader.readLine()) != null) {
                    buffer.append(line);
                }
-
                result = buffer.toString();
 
            } catch (Exception e) {
-               e.printStackTrace();
+              // e.printStackTrace();
            }
-
 
            return result;
        }
@@ -197,8 +238,6 @@ public class MainActivity extends AppCompatActivity {
            String url_for_img = "http://openweathermap.org/img/w/";
 
            lv = (ListView) findViewById(R.id.mainList);
-
-
            adapter = new WorkingAdapter(MainActivity.this, R.id.mainList, fetch);
            lv.setAdapter(adapter);
 
@@ -223,24 +262,44 @@ public class MainActivity extends AppCompatActivity {
                    double temp_max_in_c = temp_max - 273.15;
                    int temp = main.getInt("temp");
                    int temp_in_c = temp - 273;
-
-
                    double speed = wind.getDouble("speed");
+
+//                   d1txt1.setText(""+humidity);
 
                   // String url_for_img1 = url_for_img + icon + ".png";
                   // Picasso.with(getApplicationContext()).load(url_for_img1);
 
-                   UpData a = new UpData(""+date,""+temp_in_c, p);
-                   fetch.add(a);
+                   Realm realm =  Realm.getInstance(getApplicationContext());
+                   realm.beginTransaction();
+
+                   WeatherDbase weatherDbase = realm.createObject(WeatherDbase.class);
+
+                   weatherDbase.setDataInDb(date + "");
+                   weatherDbase.setTempInDb(temp_in_c + "");
+                   weatherDbase.setDirectionInDb(p);
+
+                   RealmResults<WeatherDbase> results = realm.where(WeatherDbase.class).findAll();
+                   //results.clear();
+                   int count = results.size();
+
+                   if(count <= 5 && count > 0){
+                       UpData b = new UpData(""+results.get(i).getDataInDb(),""+results.get(i).getTempInDb(), results.get(i).getDirectionInDb());
+                       fetch.add(b);
+                   }else if(count > 5){
+                       UpData b = new UpData(""+results.get(count-6).getDataInDb(),""+results.get(count-6).getTempInDb(), results.get(count-6).getDirectionInDb());
+                       fetch.add(b);
+                   }
+
+                   realm.commitTransaction();
+
                }
-
-
            } catch (Exception e) {
-               Toast.makeText(getApplicationContext(), "error " + e, Toast.LENGTH_LONG).show();
+            //   Toast.makeText(getApplicationContext(), "error " + e, Toast.LENGTH_LONG).show();
            }
 
        }
    }
+
 }
 
 

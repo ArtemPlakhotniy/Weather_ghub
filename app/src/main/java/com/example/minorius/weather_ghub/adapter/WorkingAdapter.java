@@ -11,12 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.minorius.weather_ghub.R;
+import com.example.minorius.weather_ghub.WeatherDb.WeatherDbase;
 
 import java.util.ArrayList;
 
-/**
- * Created by Minorius on 22.11.2015.
- */
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class WorkingAdapter extends ArrayAdapter<UpData> {
 
     private final Activity activity;
@@ -40,22 +41,19 @@ public class WorkingAdapter extends ArrayAdapter<UpData> {
             holder.txtDate = (TextView) v.findViewById(R.id.txtDate);
             holder.txtTemp = (TextView) v.findViewById(R.id.txtTemp);
             holder.txtWeather = (TextView) v.findViewById(R.id.txtWeather);
-//            holder.imageView = (ImageView) v.findViewById(R.id.imageView);
-//            holder.textView8 = (TextView) v.findViewById(R.id.textView8);
-//            holder.textView10 = (TextView) v.findViewById(R.id.textView10);
+
             v.setTag(holder);
         } else {
             holder = (ViewHolder)v.getTag();
         }
 
         UpData upData = weather_list.get(position);
+
         if(upData != null){
             holder.txtDate.setText(upData.getDate());
             holder.txtTemp.setText(upData.getTemp());
             holder.txtWeather.setText(upData.getP());
 
-//            holder.textView8.setText(upData.getSpeed());
-//            holder.textView10.setText(upData.getHumidity());
         }
         return v;
     }
@@ -64,9 +62,5 @@ public class WorkingAdapter extends ArrayAdapter<UpData> {
         public TextView txtDate;
         public TextView txtTemp;
         public TextView txtWeather;
-//        public ImageView imageView;
-//        public TextView textView8;
-//        public TextView textView10;
-
     }
 }

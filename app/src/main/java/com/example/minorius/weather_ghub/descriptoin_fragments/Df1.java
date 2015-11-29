@@ -14,9 +14,6 @@ import com.example.minorius.weather_ghub.adapter.WorkingAdapter;
 
 public class Df1 extends Fragment {
 
-    WorkingAdapter wa;
-
-    TextView d1txt1;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
