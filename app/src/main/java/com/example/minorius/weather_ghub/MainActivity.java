@@ -1,5 +1,5 @@
 package com.example.minorius.weather_ghub;
-
+//START
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -26,6 +26,10 @@ import com.example.minorius.weather_ghub.WeatherDb.WeatherDbase;
 import com.example.minorius.weather_ghub.adapter.UpData;
 import com.example.minorius.weather_ghub.adapter.WorkingAdapter;
 import com.example.minorius.weather_ghub.descriptoin_fragments.Df1;
+import com.example.minorius.weather_ghub.descriptoin_fragments.Df2;
+import com.example.minorius.weather_ghub.descriptoin_fragments.Df3;
+import com.example.minorius.weather_ghub.descriptoin_fragments.Df4;
+import com.example.minorius.weather_ghub.descriptoin_fragments.Df5;
 import com.squareup.picasso.Picasso;
 
 
@@ -54,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
     private GetData gd;
 
     Df1 df1;
+    Df2 df2;
+    Df3 df3;
+    Df4 df4;
+    Df5 df5;
 
     FragmentManager fm;
 
-    public TextView d1txt1;
-    public TextView d1txt2;
-    public TextView d1txt3;
+    public TextView textView4;
 
     Realm realm;
 
@@ -91,14 +97,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        GetData gd = new GetData();
+        final GetData gd = new GetData();
         gd.execute();
 
         df1 = new Df1();
-
-        d1txt1 = (TextView) findViewById(R.id.d1txt1);
-        d1txt2 = (TextView) findViewById(R.id.d1txt2);
-        d1txt3 = (TextView) findViewById(R.id.d1txt3);
+        df2 = new Df2();
+        df3 = new Df3();
+        df4 = new Df4();
+        df5 = new Df5();
 
         fm = getFragmentManager();
 
@@ -109,24 +115,19 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fm = getFragmentManager().beginTransaction();
                 switch (position) {
                     case 0:
-                        Toast.makeText(getApplicationContext(), ""+position, Toast.LENGTH_SHORT).show();
-                        fm.replace(R.id.buffer, df1).commit();
+                        fm.replace(R.id.buffer, df1).addToBackStack(null).commit();
                         break;
                     case 1:
-                        Toast.makeText(getApplicationContext(), ""+position, Toast.LENGTH_SHORT).show();
-//                        fm.replace(R.id.buffer, p1).commit();
+                        fm.replace(R.id.buffer, df2).addToBackStack(null).commit();
                         break;
                     case 2:
-//                        fm.replace(R.id.buffer, p2).commit();
+                        fm.replace(R.id.buffer, df3).addToBackStack(null).commit();
                         break;
                     case 3:
-//                        fm.replace(R.id.buffer, p3).commit();
+                        fm.replace(R.id.buffer, df4).addToBackStack(null).commit();
                         break;
                     case 4:
-//                        fm.replace(R.id.buffer, p4).commit();
-                        break;
-                    case 5:
-//                        fm.replace(R.id.buffer, p5).commit();
+                        fm.replace(R.id.buffer, df5).addToBackStack(null).commit();
                         break;
                 }
             }
@@ -142,33 +143,26 @@ public class MainActivity extends AppCompatActivity {
                     FragmentTransaction transaction = fm.beginTransaction();
                     switch (position) {
                         case 0:
-                            Toast.makeText(getApplicationContext(), ""+position, Toast.LENGTH_SHORT).show();
                             mainList.setVisibility(View.GONE);
-                            transaction.replace(R.id.buffer2, df1);
+                            transaction.replace(R.id.buffer2, df1).addToBackStack(null).commit();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), ""+position, Toast.LENGTH_SHORT).show();
-//                            mainList.setVisibility(View.GONE);
-//                            transaction.replace(R.id.buffer2, p1);
+                            mainList.setVisibility(View.GONE);
+                            transaction.replace(R.id.buffer2, df2).addToBackStack(null).commit();;
                             break;
                         case 2:
-//                            mainList.setVisibility(View.GONE);
-//                            transaction.replace(R.id.buffer2, p2);
+                            mainList.setVisibility(View.GONE);
+                            transaction.replace(R.id.buffer2, df3).addToBackStack(null).commit();;
                             break;
                         case 3:
-//                            mainList.setVisibility(View.GONE);
-//                            transaction.replace(R.id.buffer2, p3);
+                            mainList.setVisibility(View.GONE);
+                            transaction.replace(R.id.buffer2, df4).addToBackStack(null).commit();;
                             break;
                         case 4:
-//                            mainList.setVisibility(View.GONE);
-//                            transaction.replace(R.id.buffer2, p4);
-                            break;
-                        case 5:
-//                            mainList.setVisibility(View.GONE);
-//                            transaction.replace(R.id.buffer2, p5);
+                            mainList.setVisibility(View.GONE);
+                            transaction.replace(R.id.buffer2, df5).addToBackStack(null).commit();;
                             break;
                     }
-                    transaction.addToBackStack(null).commit();;
                 }
             });
         }
@@ -185,11 +179,6 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null;
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
     }
 
     class GetData extends AsyncTask<Void, Void, String> {
@@ -254,16 +243,16 @@ public class MainActivity extends AppCompatActivity {
 
                    String date = element.getString("dt_txt");
 
-                   int humidity = main.getInt("humidity");
+
                    double temp_min = main.getDouble("temp_min");
                    double temp_min_in_c = temp_min - 273.15;
                    double temp_max = main.getDouble("temp_max");
                    double temp_max_in_c = temp_max - 273.15;
                    int temp = main.getInt("temp");
                    int temp_in_c = temp - 273;
-                   double speed = wind.getDouble("speed");
 
-//                   d1txt1.setText(""+humidity);
+                   int humidity = main.getInt("humidity");
+                   double speed = wind.getDouble("speed");
 
                   // String url_for_img1 = url_for_img + icon + ".png";
                   // Picasso.with(getApplicationContext()).load(url_for_img1);
@@ -276,9 +265,13 @@ public class MainActivity extends AppCompatActivity {
                    weatherDbase.setDataInDb(date + "");
                    weatherDbase.setTempInDb(temp_in_c + "");
                    weatherDbase.setDirectionInDb(p);
+                   weatherDbase.setWindSpeedInDb(speed + "");
+                   weatherDbase.setHumidityInDb(humidity +"");
 
                    RealmResults<WeatherDbase> results = realm.where(WeatherDbase.class).findAll();
+
                    //results.clear();
+
                    int count = results.size();
 
                    if(count <= 5 && count > 0){

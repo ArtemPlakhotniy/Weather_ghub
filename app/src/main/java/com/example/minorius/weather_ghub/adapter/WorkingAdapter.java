@@ -21,7 +21,7 @@ import io.realm.RealmResults;
 public class WorkingAdapter extends ArrayAdapter<UpData> {
 
     private final Activity activity;
-    private final ArrayList<UpData> weather_list;
+    public final ArrayList<UpData> weather_list;
 
     public WorkingAdapter(final Activity a, final int textViewResourceId, final ArrayList<UpData>weather_list){
         super(a, textViewResourceId, weather_list);

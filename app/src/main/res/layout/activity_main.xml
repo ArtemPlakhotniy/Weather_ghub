@@ -9,18 +9,18 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:name="com.example.minorius.weather_ghub.f1"
+        android:id="@+id/listconteiner"
+        android:layout_alignParentLeft="true"
+        />
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:name="com.example.minorius.weather_ghub.f2"
         android:id="@+id/dataconteiner"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.example.minorius.weather_ghub.f1"
-        android:id="@+id/listconteiner"
-        android:layout_alignParentLeft="true"
-        />
 
 </RelativeLayout>

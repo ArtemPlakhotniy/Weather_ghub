@@ -11,7 +11,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Температура:"
         android:id="@+id/textView4"
-        android:layout_above="@+id/txtF3"
+        android:layout_above="@+id/txtF3_4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp" />
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
-        android:id="@+id/txtF1"
+        android:id="@+id/txtF1_4"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -30,40 +30,40 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
-        android:id="@+id/txtF3"
-        android:layout_below="@+id/txtF1"
-        android:layout_alignLeft="@+id/txtF1"
-        android:layout_alignStart="@+id/txtF1" />
+        android:id="@+id/txtF3_4"
+        android:layout_below="@+id/txtF1_4"
+        android:layout_alignLeft="@+id/txtF1_4"
+        android:layout_alignStart="@+id/txtF1_4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
-        android:id="@+id/txtF2"
-        android:layout_below="@+id/txtF3"
-        android:layout_alignLeft="@+id/txtF3"
-        android:layout_alignStart="@+id/txtF3" />
+        android:id="@+id/txtF2_4"
+        android:layout_below="@+id/txtF3_4"
+        android:layout_alignLeft="@+id/txtF3_4"
+        android:layout_alignStart="@+id/txtF3_4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
-        android:id="@+id/txtF4"
-        android:layout_below="@+id/txtF2"
-        android:layout_alignLeft="@+id/txtF2"
-        android:layout_alignStart="@+id/txtF2" />
+        android:id="@+id/txtF4_4"
+        android:layout_below="@+id/txtF2_4"
+        android:layout_alignLeft="@+id/txtF2_4"
+        android:layout_alignStart="@+id/txtF2_4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Loading..."
-        android:id="@+id/txtF5"
-        android:layout_below="@+id/txtF4"
-        android:layout_alignLeft="@+id/txtF4"
-        android:layout_alignStart="@+id/txtF4" />
+        android:id="@+id/txtF5_4"
+        android:layout_below="@+id/txtF4_4"
+        android:layout_alignLeft="@+id/txtF4_4"
+        android:layout_alignStart="@+id/txtF4_4" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -71,7 +71,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Погодные условия:"
         android:id="@+id/textView5"
-        android:layout_above="@+id/txtF2"
+        android:layout_above="@+id/txtF2_4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp" />
@@ -82,7 +82,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Дата:"
         android:id="@+id/textView6"
-        android:layout_above="@+id/txtF4"
+        android:layout_above="@+id/txtF4_4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp" />
@@ -93,7 +93,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Скорость ветра:"
         android:id="@+id/textView7"
-        android:layout_alignBottom="@+id/txtF4"
+        android:layout_alignBottom="@+id/txtF4_4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp" />
@@ -104,7 +104,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Влажность:"
         android:id="@+id/textView8"
-        android:layout_alignBottom="@+id/txtF5"
+        android:layout_alignBottom="@+id/txtF5_4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="10dp" />
